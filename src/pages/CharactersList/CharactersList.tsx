@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
-import caractersDataMock from "../data/caracters";
-import { Layout } from "../layout";
+import caractersDataMock from "../../data/caracters";
+import { Layout } from "../../layout";
 
 export const CharactersList = () => {
   const { data } = caractersDataMock;
