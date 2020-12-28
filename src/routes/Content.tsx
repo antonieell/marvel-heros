@@ -7,7 +7,7 @@ export const ContentRoutes = () => {
       <Route exact path="/">
         <CharactersList />
       </Route>
-      <Route exact path="/characters/:characterId">
+      <Route exact path="/character/:characterId">
         <CharacterDetails />
       </Route>
     </>

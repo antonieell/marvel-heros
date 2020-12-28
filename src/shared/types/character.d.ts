@@ -1,3 +1,20 @@
+export default interface ICharacter {
+  code: number;
+  status: string;
+  copyright: string;
+  attributionText: string;
+  attributionHTML: string;
+  data: {
+    offset: number;
+    limit: number;
+    total: number;
+    count: number;
+    results: Array<Result>;
+  };
+  etag: string;
+}
+
+
 type Series = {
   available: number;
   returned: number;
@@ -41,35 +58,20 @@ type Thumbnail = {
   extension: string;
 };
 
-export default interface ICharacter {
-  code: number;
-  status: string;
-  copyright: string;
-  attributionText: string;
-  attributionHTML: string;
-  data: {
-    offset: number;
-    limit: number;
-    total: number;
-    count: number;
-    results: Array<{
-      id: number;
-      name: string;
-      description: string;
-      modified: string;
-      resourceURI: string;
-      thumbnail: Thumbnail;
-      comics: Comics;
-      stories: Stories;
-      events: Events;
-      series: Series;
-      urls: Array<{
-        type: string;
-        url: string;
-      }>;
-    }>;
-  };
-  etag: string;
-}
-
+type Result = {
+  id: number;
+  name: string;
+  description: string;
+  modified: string;
+  resourceURI: string;
+  thumbnail: Thumbnail;
+  comics: Comics;
+  stories: Stories;
+  events: Events;
+  series: Series;
+  urls: Array<{
+    type: string;
+    url: string;
+  }>;
+};
 

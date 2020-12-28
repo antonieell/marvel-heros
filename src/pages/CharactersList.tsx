@@ -1,3 +1,4 @@
+import {Link} from "react-router-dom";
 import caractersDataMock from "../data/caracters";
 import { Layout } from "../layout";
 
@@ -20,12 +21,12 @@ interface HeroCardProps {
 }
 const HeroCard: React.FC<HeroCardProps> = ({ value, idx }) => {
   return (
-    <div
+    <Link to={`/character/${value.id}`}
       className="h-40 bg-gray-900"
       style={{ backgroundImage: `url(${value.thumbnail.path}?apikey=4e8a935f1660c523f9c08e87acf0d188)` }}
       key={idx}
     >
       {value.name}
-    </div>
+    </Link>
   );
 };
