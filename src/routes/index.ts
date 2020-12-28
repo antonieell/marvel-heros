@@ -1,1 +1,1 @@
-export {}
+export {ContentRoutes} from './Content'

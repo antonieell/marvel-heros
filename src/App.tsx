@@ -1,8 +1,13 @@
+import { BrowserRouter as Router, Switch } from "react-router-dom";
+import { ContentRoutes } from "./routes";
+
 function App() {
   return (
-    <div className="App">
-      <p>Hello storm</p>
-    </div>
+    <Router>
+      <Switch>
+        <ContentRoutes />
+      </Switch>
+    </Router>
   );
 }
 
