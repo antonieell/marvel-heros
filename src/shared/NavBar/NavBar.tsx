@@ -7,7 +7,7 @@ export const NavBar = () => {
     <header className="absolute inset-0 h-12 px-4 bg-black ">
       <div className="relative flex items-center justify-center h-full mx-auto max-w-screen-lg ">
         <Link className="w-24 mx-auto text-center" to="/">
-          <img className="w-full h-full" src="/assets/marvelLogo.png" />
+          <img className="w-full h-full" alt="Logo" src="/assets/marvelLogo.png" />
         </Link>
         <SearchInput />
       </div>
