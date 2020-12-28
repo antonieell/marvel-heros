@@ -1,5 +1,7 @@
+import {Layout} from "../layout"
+
 export const CharacterDetails = () => {
   return (
-    <>Charackers details</>
+    <Layout>Charackers details</Layout>
   )
 }

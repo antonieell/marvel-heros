@@ -1,5 +1,7 @@
+import {Layout} from "../layout"
+
 export const CharactersList = () => {
   return (
-    <>Charackers list</>
+    <Layout>Charackers list</Layout>
   )
 }
