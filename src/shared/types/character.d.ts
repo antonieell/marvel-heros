@@ -40,6 +40,7 @@ type Thumbnail = {
   path: string;
   extension: string;
 };
+
 export default interface ICharacter {
   code: number;
   status: string;
@@ -57,15 +58,15 @@ export default interface ICharacter {
       description: string;
       modified: string;
       resourceURI: string;
-      urls: Array<{
-        type: string;
-        url: string;
-      }>;
-      thumbnail: thumbnail;
+      thumbnail: Thumbnail;
       comics: Comics;
       stories: Stories;
       events: Events;
       series: Series;
+      urls: Array<{
+        type: string;
+        url: string;
+      }>;
     }>;
   };
   etag: string;
