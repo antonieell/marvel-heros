@@ -1,1 +1,1 @@
-export {default as ICharacter}from './character' 
+export * from './character' 
