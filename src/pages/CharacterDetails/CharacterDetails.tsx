@@ -64,7 +64,9 @@ const HeroDetails: React.FC<HeroDetailsProps> = ({ value }) => {
         <h3 className="font-extrabold text-red-600">Name</h3>
         <p>{value.name}</p>
         <h3 className="font-extrabold text-red-600">Description</h3>
-        <p className="max-w-lg">{value.description}</p>
+        <p className="max-w-lg">
+          {value.description ? value.description : "Description does not exist"}
+        </p>
       </article>
     </section>
   );
