@@ -99,7 +99,7 @@ export const comicsDataMocked : IComics= {
             "price": 1.99
           }
         ],
-        "tumbnail": {
+        "thumbnail": {
           "path": "http://i.annihil.us/u/prod/marvel/i/mg/c/60/58dbce634ea70",
           "extension": "jpg"
         },

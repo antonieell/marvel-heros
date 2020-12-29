@@ -15,7 +15,6 @@ export const CharactersList = () => {
     })();
   }, []);
 
-
   const loadNextPage = async () => {
     const offset = dataHeros.length;
     const { data } = await getCharacters(offset);
@@ -34,7 +33,10 @@ export const CharactersList = () => {
       </div>
       {hasNextPage && (
         <div className="flex items-center justify-center w-full pb-8 mt-4">
-          <button onClick={() => loadNextPage()} className="px-4 py-2 mx-auto font-extrabold text-white bg-red-700">
+          <button
+            onClick={() => loadNextPage()}
+            className="px-4 py-2 mx-auto font-extrabold text-white bg-red-700"
+          >
             Carregar Mais
           </button>
         </div>

@@ -20,7 +20,6 @@ type TextObjects = Array<{
 }>;
 export type Result = {
   id: number;
-  name: string;
   description: string;
   modified: string;
   resourceURI: string;
@@ -33,13 +32,20 @@ export type Result = {
   pageCount: number;
   textObjects: TextObjects;
   title: string;
-  thumbnail: Thumbnail;
   issueNumber: number;
   variantDescription: string;
   description: string;
   modified: string;
+  variants: Vaiants;
+  collections: Array<any>;
+  collectedIssues: any[];
   digitalId: number;
-  comics: Comics;
+  dates: Dates;
+  creators: Creators;
+  characters: Characters;
+  thumbnail: Thumbnail;
+  images: Images;
+  prices: Prices;
   stories: Stories;
   events: Events;
   series: Series;
@@ -82,8 +88,46 @@ export type Comics = {
     name: string;
   }>;
 };
+
+export type Variant = Array<{
+  resourceURI: string;
+  name: string;
+}>;
+
+export type Dates = Array<{
+  type: string;
+  date: string;
+}>;
+
+export type Prices = Array<{
+  type: string;
+  price: number;
+}>;
+
 export type Thumbnail = {
   path: string;
   extension: string;
 };
 
+export type Images = Array<{
+  path: string;
+  extension: string;
+}>;
+export type Item = Array<{
+  resourceURI: string;
+  name: string;
+  role: string;
+}>;
+export type Creators = {
+  available: number;
+  collectionURI: string;
+  items: Item;
+  returned: number;
+};
+
+export type Characters = {
+  available: number;
+  collectionURI: string;
+  items: Array<{ resourceURI: string; name: string }>;
+  returned: number;
+};
