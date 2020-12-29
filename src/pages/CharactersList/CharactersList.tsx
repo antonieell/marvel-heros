@@ -1,23 +1,23 @@
-import {useEffect} from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import {getCharacters} from "../../api";
-import caractersDataMock from "../../data/caracters";
+import { getCharacters } from "../../api";
 import { Layout } from "../../layout";
+import { Result } from "../../shared/types";
 
 export const CharactersList = () => {
-  const { data } = caractersDataMock;
+  const [dataHeros, setDataHeros] = useState<Result[]>([]);
 
   useEffect(() => {
-    (async ()=>{
-      const fetchData = await getCharacters()
-      console.log(fetchData)
-    })()
-  },[])
+    (async () => {
+      const { data } = await getCharacters();
+      setDataHeros(data.data.results);
+    })();
+  }, []);
   return (
     <Layout>
-      <div className="mx-auto max-w-screen-2xl wrapper gap-1 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 auto-rows-auto">
-        {data.results.map((value, idx) => (
-          <HeroCard idx={idx} value={value} />
+      <div className="mx-auto max-w-screen-2xl wrapper md:gap-1 grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 auto-rows-auto">
+        {dataHeros.map((value) => (
+          <HeroCard value={value} />
         ))}
       </div>
     </Layout>
@@ -25,16 +25,18 @@ export const CharactersList = () => {
 };
 
 interface HeroCardProps {
-  value: any;
-  idx: number;
+  value: Result;
 }
-const HeroCard: React.FC<HeroCardProps> = ({ value, idx }) => {
+
+const HeroCard: React.FC<HeroCardProps> = ({ value }) => {
   return (
     <Link
-      to={`/character/${value.id}`}
-      className="relative h-64 bg-gray-900"
-      //style={{ backgroundImage: `url(${value.thumbnail.path})`}}
-      key={idx}
+      to={{ pathname: `/character/${value.id}`, state: value }}
+      className="relative h-64 bg-gray-900 bg-center bg-no-repeat bg-cover md:h-72"
+      style={{
+        backgroundImage: `url(${value.thumbnail.path}/landscape_incredible.${value.thumbnail.extension})`,
+      }}
+      key={value.id}
     >
       <span
         style={{ clipPath: "polygon(5% 0, 100% 0, 95% 100%, 0 100%)" }}
