@@ -3,12 +3,14 @@ import { ICharacter } from "../shared/types";
 import api from "./api";
 import axios from 'axios'
 
-export const getCharacters = () => {
-  const response: Promise<AxiosResponse<ICharacter>> = api.get(
-    "/v1/public/characters"
-  );
+type Offset = undefined | number
+export const getCharacters = (offset:Offset = undefined) => {
+  const response: Promise<
+    AxiosResponse<ICharacter>
+  > = api.get("/v1/public/characters", { params: { offset } });
   return response;
 };
+
 export const getCharacterById = (id: number) => {
   const response: Promise<AxiosResponse<ICharacter>> = api.get(
     `/v1/public/characters/${id}`
@@ -30,3 +32,5 @@ export const getCharacterByStartsName = (nameStartsWith: string) => {
   );
   return response;
 };
+
+

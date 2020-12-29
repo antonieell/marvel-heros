@@ -6,6 +6,7 @@ import { Result } from "../../shared/types";
 
 export const CharactersList = () => {
   const [dataHeros, setDataHeros] = useState<Result[]>([]);
+  const [hasNextPage, setHasNextPage] = useState(true);
 
   useEffect(() => {
     (async () => {
@@ -13,6 +14,17 @@ export const CharactersList = () => {
       setDataHeros(data.data.results);
     })();
   }, []);
+
+
+  const loadNextPage = async () => {
+    const offset = dataHeros.length;
+    const { data } = await getCharacters(offset);
+    const results = data.data.results;
+    setDataHeros((prev) => [...prev, ...results]);
+    if (data.data.offset + data.data.count >= data.data.total)
+      return setHasNextPage(false);
+  };
+
   return (
     <Layout>
       <div className="mx-auto max-w-screen-2xl wrapper md:gap-1 grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 auto-rows-auto">
@@ -20,6 +32,13 @@ export const CharactersList = () => {
           <HeroCard value={value} />
         ))}
       </div>
+      {hasNextPage && (
+        <div className="flex items-center justify-center w-full pb-8 mt-4">
+          <button onClick={() => loadNextPage()} className="px-4 py-2 mx-auto font-extrabold text-white bg-red-700">
+            Carregar Mais
+          </button>
+        </div>
+      )}
     </Layout>
   );
 };
