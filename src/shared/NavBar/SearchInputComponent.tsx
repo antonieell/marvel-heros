@@ -31,7 +31,6 @@ const SearchInput: React.FC = () => {
       <input
         id="search_heros"
         autoComplete="off"
-        onChange={(e) => console.log(e.target.value)}
         onBlur={() => handleSearchState("close")}
         className={clxs(
           "bg-transparent  rounded-sm transition-all duration-1000",

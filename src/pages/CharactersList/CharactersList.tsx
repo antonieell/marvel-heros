@@ -24,9 +24,7 @@ const HeroCard: React.FC<HeroCardProps> = ({ value, idx }) => {
     <Link
       to={`/character/${value.id}`}
       className="relative h-64 bg-gray-900"
-      style={{
-        backgroundImage: `url(${value.thumbnail.path}?apikey=4e8a935f1660c523f9c08e87acf0d188)`,
-      }}
+      //style={{ backgroundImage: `url(${value.thumbnail.path})`}}
       key={idx}
     >
       <span
