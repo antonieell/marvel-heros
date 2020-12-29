@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useLocation, useRouteMatch } from "react-router-dom";
 import { getCharacterById } from "../../api";
 import { Layout } from "../../layout";
@@ -10,14 +10,14 @@ export const CharacterDetails = () => {
   const { params } = useRouteMatch<{ characterId: string }>();
   const { state } = useLocation<Result>();
 
-  useCallback(() => setHeroData(state), [state]);
+  useMemo(() => setHeroData(state), [state]);
 
   useEffect(() => {
     if (heroData) {
-      console.log("Data fetched from state");
       return;
     }
     (async () => {
+      console.log("fetch from api")
       const id = parseInt(params.characterId);
       const { data } = await getCharacterById(id);
       setHeroData(data.data.results[0]);
