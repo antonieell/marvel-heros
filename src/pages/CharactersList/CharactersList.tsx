@@ -1,9 +1,18 @@
+import {useEffect} from "react";
 import { Link } from "react-router-dom";
+import {getCharacters} from "../../api";
 import caractersDataMock from "../../data/caracters";
 import { Layout } from "../../layout";
 
 export const CharactersList = () => {
   const { data } = caractersDataMock;
+
+  useEffect(() => {
+    (async ()=>{
+      const fetchData = await getCharacters()
+      console.log(fetchData)
+    })()
+  },[])
   return (
     <Layout>
       <div className="mx-auto max-w-screen-2xl wrapper gap-1 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 auto-rows-auto">
