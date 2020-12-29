@@ -1,9 +1,28 @@
 import clsx from "clsx";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import {getCollectioUri} from "../../api/comics.api";
+import { comicsDataMocked } from "../../data/comics";
+import { Comics } from "../../shared/types";
+import { Result } from "../../shared/types/comics";
 
-const fakeArray = [0, 1, 2, 3, 4];
-export const SliderHeroContent = () => {
+interface SliderHeroContentProps {
+  comics: Comics | undefined;
+}
+
+export const SliderHeroContent: React.FC<SliderHeroContentProps> = ({
+  comics,
+}) => {
+  const [results,setResults] = useState<Result[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
+
+  useEffect(() => {
+    (async () => {
+      if (comics) {
+        const { data } = await getCollectioUri(comics.collectionURI);
+        setResults(data.data.results);
+      }
+    })();
+  }, [comics]);
 
   const scrollRight = () => {
     setCurrentIndex(currentIndex + 1);
@@ -12,12 +31,13 @@ export const SliderHeroContent = () => {
     setCurrentIndex(currentIndex - 1);
   };
 
+
   return (
     <section className="w-full">
       <Container>
         <Carrousel scrollRight={scrollRight} scrollLeft={scrollLeft}>
-          {fakeArray.map((v, i) => (
-            <Item indexItem={i} currentIndex={currentIndex} />
+          {results.map((value, index) => (
+            <Item value={value} indexItem={index} currentIndex={currentIndex} />
           ))}
         </Carrousel>
       </Container>
@@ -56,19 +76,24 @@ const Carrousel: React.FC<CarrouselProps> = ({
 };
 
 interface ItemProps {
+  value: Result;
   indexItem: number;
   currentIndex: number;
 }
-const Item: React.FC<ItemProps> = ({ indexItem, currentIndex }) => {
+const Item: React.FC<ItemProps> = ({ value, indexItem, currentIndex }) => {
   return (
     <div
+      key="indexItem"
       className={clsx(
         `flex-shrink-0 w-1/4 bg-gray-400 h-full transform scale-90`,
         indexItem < currentIndex && "hidden"
       )}
     >
-      O índex desse ítem é: {indexItem}
-      <br />O index atual é : {currentIndex}
+      <img
+        className="w-full h-full bg-cover rounded-xl"
+        src={`${value.thumbnail.path}/standard_fantastic.${value?.thumbnail?.extension}`}
+        alt={value.title}
+      />
     </div>
   );
 };
