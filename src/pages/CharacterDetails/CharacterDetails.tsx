@@ -3,6 +3,7 @@ import { useLocation, useRouteMatch } from "react-router-dom";
 import { getCharacterById } from "../../api";
 import { Layout } from "../../layout";
 import { Result } from "../../shared/types";
+import { SliderHeroContent } from "./SliderHeroContent";
 
 export const CharacterDetails = () => {
   const [heroData, setHeroData] = useState<Result>();
@@ -17,8 +18,9 @@ export const CharacterDetails = () => {
       return;
     }
     (async () => {
-      console.log("fetch from api")
+      console.log("fetch from api");
       const id = parseInt(params.characterId);
+      //TODO: Capturar erros
       const { data } = await getCharacterById(id);
       setHeroData(data.data.results[0]);
     })();
@@ -36,7 +38,7 @@ export const CharacterDetails = () => {
 
 const Container: React.FC = ({ children }) => {
   return (
-    <main className="flex flex-col justify-center w-full px-12 py-6 mx-auto">
+    <main className="flex flex-col justify-center w-full px-12 py-6 mx-auto gap-8 md:gap-16">
       {children}
     </main>
   );
@@ -72,6 +74,3 @@ const HeroDetails: React.FC<HeroDetailsProps> = ({ value }) => {
   );
 };
 
-const SliderHeroContent = () => {
-  return <section>SliderHeroContent</section>;
-};
