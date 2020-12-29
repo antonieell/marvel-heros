@@ -1,10 +1,33 @@
+import { useCallback, useEffect, useState } from "react";
+import { useLocation, useRouteMatch } from "react-router-dom";
+import { getCharacterById } from "../../api";
 import { Layout } from "../../layout";
+import { Result } from "../../shared/types";
 
 export const CharacterDetails = () => {
+  const [heroData, setHeroData] = useState<Result>();
+
+  const { params } = useRouteMatch<{ characterId: string }>();
+  const { state } = useLocation<Result>();
+
+  useCallback(() => setHeroData(state), [state]);
+
+  useEffect(() => {
+    if (heroData) {
+      console.log("Data fetched from state");
+      return;
+    }
+    (async () => {
+      const id = parseInt(params.characterId);
+      const { data } = await getCharacterById(id);
+      setHeroData(data.data.results[0]);
+    })();
+  }, [heroData, params.characterId]);
+
   return (
     <Layout>
       <Container>
-        <HeroDetails />
+        <HeroDetails value={heroData} />
         <SliderHeroContent />
       </Container>
     </Layout>
@@ -18,21 +41,35 @@ const Container: React.FC = ({ children }) => {
     </main>
   );
 };
-const HeroDetails = () => {
+
+interface HeroDetailsProps {
+  value: Result | undefined;
+}
+
+const HeroDetails: React.FC<HeroDetailsProps> = ({ value }) => {
+  if (!value) {
+    //TODO: FAZER SKELETONS
+    return <div>Aguarde um instante</div>;
+  }
   return (
     <section className="flex flex-col items-center justify-center md:flex-row gap-12 md:gap-16">
-      <div className="w-full h-64 max-w-lg bg-gray-300 rounded-lg ">
-        {/*<img src="" alt"/">*/}
+      <div className="w-full bg-gray-300 bg-no-repeat bg-cover md:w-80 md:h-80 rounded-xl ">
+        <img
+          className="object-cover object-center w-full h-full rounded-xl"
+          src={`${value?.thumbnail?.path}/standard_fantastic.${value?.thumbnail?.extension}`}
+          alt={`${value.name}`}
+        />
       </div>
       <article>
         <h3 className="font-extrabold text-red-600">Name</h3>
-        <p>""""""Name""""""</p>
+        <p>{value.name}</p>
         <h3 className="font-extrabold text-red-600">Description</h3>
-        <p>""""""Description""""""</p>
+        <p className="max-w-lg">{value.description}</p>
       </article>
     </section>
   );
 };
+
 const SliderHeroContent = () => {
   return <section>SliderHeroContent</section>;
 };
