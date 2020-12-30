@@ -53,39 +53,29 @@ const Container: React.FC = ({ children }) => {
   );
 };
 
-interface CarrouselProps {
-  scrollRight: () => void;
-  scrollLeft: () => void;
-}
 const Carrousel: React.FC<CarrouselProps> = ({
   children,
-  scrollRight,
-  scrollLeft,
+  handleCarrousel
 }) => {
   return (
     <div className="relative flex items-center w-full h-full overflow-x-hidden ">
-      <button onClick={scrollRight} className="absolute right-0">
+      <button onClick={() => handleCarrousel('right')} className="absolute right-0">
         Decrementa
       </button>
       {children}
-      <button onClick={scrollLeft} className="absolute left-0">
+      <button onClick={() => handleCarrousel('left')} className="absolute left-0">
         Incrementa
       </button>
     </div>
   );
 };
 
-interface ItemProps {
-  value: Result;
-  indexItem: number;
-  currentIndex: number;
-}
 const Item: React.FC<ItemProps> = ({ value, indexItem, currentIndex }) => {
   return (
     <div
       key="indexItem"
       className={clsx(
-        `flex-shrink-0 w-1/4 bg-gray-400 h-full transform scale-90`,
+`flex-shrink-0 w-full md:w-1/4 bg-gray-400 h-full transform scale-90`,
         indexItem < currentIndex && "hidden"
       )}
     >
