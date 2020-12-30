@@ -1,11 +1,13 @@
 import clsx from "clsx";
-import { useEffect, useState } from "react";
-import { Comics } from "../../shared/types";
+import { useState } from "react";
+import { Comics, Events, Series } from "../../shared/types";
 import { Result } from "../../shared/types/comics";
 import { useResults } from "./useResults";
 
 interface SliderHeroContentProps {
   comics: Comics | undefined;
+  series: Series | undefined;
+  events: Events | undefined;
 }
 interface CarrouselProps {
   handleCarrousel: (action: "right" | "left") => void;
@@ -18,9 +20,11 @@ interface ItemProps {
 
 export const SliderHeroContent: React.FC<SliderHeroContentProps> = ({
   comics,
+  series,
+  events,
 }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const { results } = useResults({ comics });
+  const { results } = useResults({ comics, events, series });
 
   const handleCarrousel = (action: "right" | "left") => {
     if (results.length <= 4) return;

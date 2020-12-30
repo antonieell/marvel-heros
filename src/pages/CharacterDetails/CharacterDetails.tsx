@@ -30,7 +30,11 @@ export const CharacterDetails = () => {
     <Layout>
       <Container>
         <HeroDetails value={heroData} />
-        <SliderHeroContent comics={heroData?.comics} />
+        <SliderHeroContent
+          series={heroData?.series}
+          events={heroData?.events}
+          comics={heroData?.comics}
+        />
       </Container>
     </Layout>
   );
