@@ -56,14 +56,14 @@ const Carrousel: React.FC<CarrouselProps> = ({ children, handleCarrousel }) => {
     <div className="w-full mx-auto h-96 max-w-screen-xl">
       <div className="relative flex items-center w-full h-full overflow-x-hidden ">
         <button
-          onClick={() => handleCarrousel("right")}
+          onClick={() => handleCarrousel("left")}
           className="absolute left-0 z-20 w-10 h-10 bg-gray-900 rounded-full leading-10 bg-opacity-75"
         >
           <img src="/svg/arrowLeft.svg" alt="Arrow Right" className="absolute inset-0 object-cover w-full"/>
         </button>
         {children}
         <button
-          onClick={() => handleCarrousel("left")}
+          onClick={() => handleCarrousel("right")}
           className="absolute right-0 z-20 w-10 h-10 bg-gray-900 rounded-full leading-10 bg-opacity-75"
         >
           <img src="/svg/arrowRight.svg" alt="Arrow Left" className="absolute inset-0 object-cover w-full"/>
