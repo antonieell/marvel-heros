@@ -2,6 +2,7 @@ import clsx from "clsx";
 import { useState } from "react";
 import { Comics, Events, Series } from "../../shared/types";
 import { Result } from "../../shared/types/comics";
+import {SkeletonItem} from "./Skeleton";
 import { useResults } from "./useResults";
 
 interface SliderHeroContentProps {
@@ -24,7 +25,7 @@ export const SliderHeroContent: React.FC<SliderHeroContentProps> = ({
   events,
 }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const { results } = useResults({ comics, events, series });
+  const { results,isLoading } = useResults({ comics, events, series });
 
   const handleCarrousel = (action: "right" | "left") => {
     if (results.length <= 4) return;
@@ -41,6 +42,7 @@ export const SliderHeroContent: React.FC<SliderHeroContentProps> = ({
   return (
     <section className="w-full">
       <Carrousel handleCarrousel={handleCarrousel}>
+        {isLoading && <SkeletonItem/>}
         {results.map((value, index) => (
           <Item value={value} indexItem={index} currentIndex={currentIndex} />
         ))}

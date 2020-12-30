@@ -11,6 +11,7 @@ interface useResultsProps {
 
 export const useResults = ({ comics, events, series }: useResultsProps) => {
   const [results, setResults] = useState<Result[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
     (async () => {
       if (comics) {
@@ -25,6 +26,7 @@ export const useResults = ({ comics, events, series }: useResultsProps) => {
         const { data } = await getCollectioUri(series.collectionURI);
         appendInState(data.data.results);
       }
+      setIsLoading(false);
     })();
   }, [comics, events, series]);
 
@@ -32,5 +34,5 @@ export const useResults = ({ comics, events, series }: useResultsProps) => {
     setResults((prev) => [...prev, ...newResult]);
   };
 
-  return { results };
+  return { results, isLoading };
 };
