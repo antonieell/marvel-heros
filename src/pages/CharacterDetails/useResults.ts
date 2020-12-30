@@ -13,7 +13,10 @@ export const useResults = ({ comics, events, series }: useResultsProps) => {
   const [results, setResults] = useState<Result[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
+    // Uma forma masi peformática de fazer essa rotina
+    // só carregar mais imagens quando tiver próximo do final do carrousel
     (async () => {
+      setIsLoading(true);
       if (comics) {
         const { data } = await getCollectioUri(comics.collectionURI);
         setResults(data.data.results);

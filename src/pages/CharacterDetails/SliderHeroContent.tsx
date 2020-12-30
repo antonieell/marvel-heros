@@ -43,7 +43,7 @@ export const SliderHeroContent: React.FC<SliderHeroContentProps> = ({
     <section className="w-full">
       <Carrousel handleCarrousel={handleCarrousel}>
         {isLoading && <SkeletonItem/>}
-        {results.map((value, index) => (
+        {!isLoading && results.map((value, index) => (
           <Item value={value} indexItem={index} currentIndex={currentIndex} />
         ))}
       </Carrousel>

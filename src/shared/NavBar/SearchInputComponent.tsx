@@ -83,7 +83,7 @@ const SearchHeroLink: React.FC<{ value: Result; isSearchActive: boolean }> = ({
         "flex items-center h-10 overflow-hidden",
         !isSearchActive && "hidden"
       )}
-      to={`/character/${value.id}`}
+      to={{ pathname: `/character/${value.id}`, state: value }}
     >
       <div className="flex-shrink-0 block w-12 h-full bg-gray-100">
         <img
