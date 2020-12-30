@@ -1,4 +1,4 @@
-import { Comics, Events, Series, } from "../../shared/types";
+import { Comics, Events, Series } from "../../shared/types";
 import { getCollectioUri } from "../../api/comics.api";
 import { useEffect, useState } from "react";
 import { Result } from "../../shared/types/comics";

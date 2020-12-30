@@ -51,20 +51,20 @@ export const SliderHeroContent: React.FC<SliderHeroContentProps> = ({
 
 const Carrousel: React.FC<CarrouselProps> = ({ children, handleCarrousel }) => {
   return (
-    <div className="w-full mx-auto bg-gray-900 h-96 max-w-screen-xl">
+    <div className="w-full mx-auto h-96 max-w-screen-xl">
       <div className="relative flex items-center w-full h-full overflow-x-hidden ">
         <button
           onClick={() => handleCarrousel("right")}
-          className="absolute right-0"
+          className="absolute left-0 z-20 w-10 h-10 bg-gray-900 rounded-full leading-10 bg-opacity-75"
         >
-          Decrementa
+          <img src="/svg/arrowLeft.svg"className="absolute inset-0 object-cover w-full"/>
         </button>
         {children}
         <button
           onClick={() => handleCarrousel("left")}
-          className="absolute left-0"
+          className="absolute right-0 z-20 w-10 h-10 bg-gray-900 rounded-full leading-10 bg-opacity-75"
         >
-          Incrementa
+          <img src="/svg/arrowRight.svg"className="absolute inset-0 object-cover w-full"/>
         </button>
       </div>
     </div>
