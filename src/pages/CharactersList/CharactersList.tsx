@@ -3,15 +3,18 @@ import { Link } from "react-router-dom";
 import { getCharacters } from "../../api";
 import { Layout } from "../../layout";
 import { Result } from "../../shared/types";
+import {SkeletonHeroCard} from "./Skeleton";
 
 export const CharactersList = () => {
   const [dataHeros, setDataHeros] = useState<Result[]>([]);
+  const [isLoading, setIsLoading] = useState(true)
   const [hasNextPage, setHasNextPage] = useState(true);
 
   useEffect(() => {
     (async () => {
       const { data } = await getCharacters();
       setDataHeros(data.data.results);
+      setIsLoading(false)
     })();
   }, []);
 
@@ -27,6 +30,8 @@ export const CharactersList = () => {
   return (
     <Layout>
       <div className="mx-auto max-w-screen-2xl wrapper md:gap-1 grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 auto-rows-auto">
+        {isLoading && (
+        <SkeletonHeroCard/>)}
         {dataHeros.map((value) => (
           <HeroCard value={value} />
         ))}
