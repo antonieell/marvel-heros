@@ -66,7 +66,7 @@ const HeroDetails: React.FC<HeroDetailsProps> = ({ value }) => {
           alt={`${value.name}`}
         />
       </div>
-      <article className="self-start">
+      <article className="self-start md:self-center">
         <h3 className="font-extrabold text-red-600">Name</h3>
         <p>{value.name}</p>
         <h3 className="font-extrabold text-red-600">Description</h3>
