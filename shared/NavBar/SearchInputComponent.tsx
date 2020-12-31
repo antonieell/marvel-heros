@@ -4,7 +4,10 @@ import Link from "next/link";
 import { getCharacterByStartsName } from "../../api";
 import { Result } from "../types";
 import Image from "next/image";
-import { SearchHeroLinkProps, SearchHeroResultProps } from "./SearchInputComponent.d";
+import {
+  SearchHeroLinkProps,
+  SearchHeroResultProps,
+} from "./SearchInputComponent.d";
 
 const SearchInput: React.FC = () => {
   const [isSearchActive, setIsSearchActive] = useState(false);
