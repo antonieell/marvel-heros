@@ -15,7 +15,7 @@ export const NavBar: React.FC = () => {
 const Logo = () => {
   return (
     <Link href="/">
-      <a className="w-24 mx-auto text-center">
+      <a href="/" className="w-24 mx-auto text-center">
         <img className="w-full h-full" alt="Logo" src="/assets/marvelLogo.png" />
       </a>
     </Link>

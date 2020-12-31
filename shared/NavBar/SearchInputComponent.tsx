@@ -4,18 +4,7 @@ import Link from "next/link";
 import { getCharacterByStartsName } from "../../api";
 import { Result } from "../types";
 import Image from "next/image";
-
-interface SearchHeroResultProps {
-  matchHeros: Result[];
-  isSearchActive: boolean;
-  handleSearchState: (action: string) => void;
-}
-
-interface SearchHeroLinkProps {
-  value: Result;
-  isSearchActive: boolean;
-  handleSearchState: (action: string) => void;
-}
+import { SearchHeroLinkProps, SearchHeroResultProps } from "./SearchInputComponent.d";
 
 const SearchInput: React.FC = () => {
   const [isSearchActive, setIsSearchActive] = useState(false);
@@ -72,7 +61,6 @@ const SearchInput: React.FC = () => {
     </div>
   );
 };
-
 
 const SearchHeroResult: React.FC<SearchHeroResultProps> = ({
   matchHeros,
