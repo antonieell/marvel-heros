@@ -1,18 +1,33 @@
 import clxs from "clsx";
-import { useState} from "react";
-import  Link  from "next/link";
-import {getCharacterByStartsName} from "../../api";
+import { useState } from "react";
+import Link from "next/link";
+import { getCharacterByStartsName } from "../../api";
 import { Result } from "../types";
+import Image from "next/image";
+
+interface SearchHeroResultProps {
+  matchHeros: Result[];
+  isSearchActive: boolean;
+  handleSearchState: (action: string) => void;
+}
+
+interface SearchHeroLinkProps {
+  value: Result;
+  isSearchActive: boolean;
+  handleSearchState: (action: string) => void;
+}
 
 const SearchInput: React.FC = () => {
   const [isSearchActive, setIsSearchActive] = useState(false);
-  const [heros, setHero] = useState<Result[]>([])
+  const [heros, setHero] = useState<Result[]>([]);
 
-  const handleSearchCallsApi = async (e:React.ChangeEvent<HTMLInputElement>) => {
-      const {data} = await getCharacterByStartsName(e.target.value)
-      console.log(e.target.value)
-      setHero(data.data.results)
-  }
+  const handleSearchCallsApi = async (
+    e: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    const { data } = await getCharacterByStartsName(e.target.value);
+    console.log(e.target.value);
+    setHero(data.data.results);
+  };
 
   const handleSearchState = (action = "toggle") => {
     if (action === "close") return setIsSearchActive(false);
@@ -43,7 +58,11 @@ const SearchInput: React.FC = () => {
         )}
         type="text"
       />
-      <SearchHeroResult matchHeros={heros} isSearchActive={isSearchActive} />
+      <SearchHeroResult
+        matchHeros={heros}
+        handleSearchState={handleSearchState}
+        isSearchActive={isSearchActive}
+      />
       <button
         onClick={() => handleSearchState("close")}
         className={clxs(isSearchActive ? "-ml-8" : "hidden")}
@@ -54,45 +73,54 @@ const SearchInput: React.FC = () => {
   );
 };
 
-interface SearchHeroResultProps {
-  matchHeros: Result[];
-  isSearchActive: boolean;
-}
 
 const SearchHeroResult: React.FC<SearchHeroResultProps> = ({
   matchHeros,
+  handleSearchState,
   isSearchActive,
 }) => {
   return (
     <div className="absolute left-0 z-10 w-full h-auto bg-gray-600 divide-y-2 divide-gray-500 divide-opacity-25 top-full">
       {matchHeros.map((value) => (
-        <SearchHeroLink isSearchActive={isSearchActive} value={value} />
+        <>
+          <SearchHeroLink
+            handleSearchState={handleSearchState}
+            isSearchActive={isSearchActive}
+            value={value}
+          />
+        </>
       ))}
     </div>
   );
 };
 
-const SearchHeroLink: React.FC<{ value: Result; isSearchActive: boolean }> = ({
+const SearchHeroLink: React.FC<SearchHeroLinkProps> = ({
   value,
   isSearchActive,
+  handleSearchState,
 }) => {
   return (
     <Link key={value.id} href={`/character/${value.id}`}>
       <a
+        onClick={() => handleSearchState("close")}
+        href={`/character/${value.id}`}
         className={clxs(
           "flex items-center h-10 overflow-hidden",
           !isSearchActive && "hidden"
         )}
       >
         <div className="flex-shrink-0 block w-12 h-full bg-gray-100">
-          <img
+          <Image
+            width={100}
+            height={100}
+            layout="responsive"
             className="w-full h-full"
-            src={`${value?.thumbnail?.path}/standard_fantastic.${value?.thumbnail?.extension}`}
+            src={`${value?.thumbnail?.path}/standard_medium.${value?.thumbnail?.extension}`}
             alt="hero icon"
           />
         </div>
+        <p className="ml-4 truncate whitespace-nowrap">{value.name}</p>
       </a>
-      <p className="ml-4 truncate whitespace-nowrap">{value.name}</p>
     </Link>
   );
 };

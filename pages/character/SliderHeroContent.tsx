@@ -1,8 +1,9 @@
 import clsx from "clsx";
+import Image from "next/image";
 import { useState } from "react";
 import { Comics, Events, Series } from "../../shared/types";
 import { Result } from "../../shared/types/comics";
-import {SkeletonItem} from "./Skeleton";
+import { SkeletonItem } from "./Skeleton";
 import { useResults } from "./useResults";
 
 interface SliderHeroContentProps {
@@ -25,7 +26,7 @@ export const SliderHeroContent: React.FC<SliderHeroContentProps> = ({
   events,
 }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const { results,isLoading } = useResults({ comics, events, series });
+  const { results, isLoading } = useResults({ comics, events, series });
 
   const handleCarrousel = (action: "right" | "left") => {
     if (results.length <= 4) return;
@@ -42,10 +43,11 @@ export const SliderHeroContent: React.FC<SliderHeroContentProps> = ({
   return (
     <section className="w-full">
       <Carrousel handleCarrousel={handleCarrousel}>
-        {isLoading && <SkeletonItem/>}
-        {!isLoading && results.map((value, index) => (
-          <Item value={value} indexItem={index} currentIndex={currentIndex} />
-        ))}
+        {isLoading && <SkeletonItem />}
+        {!isLoading &&
+          results.map((value, index) => (
+            <Item value={value} indexItem={index} currentIndex={currentIndex} />
+          ))}
       </Carrousel>
     </section>
   );
@@ -59,14 +61,28 @@ const Carrousel: React.FC<CarrouselProps> = ({ children, handleCarrousel }) => {
           onClick={() => handleCarrousel("left")}
           className="absolute left-0 z-20 w-10 h-10 bg-gray-900 rounded-full leading-10 bg-opacity-75"
         >
-          <img src="/svg/arrowLeft.svg" alt="Arrow Right" className="absolute inset-0 object-cover w-full"/>
+          <Image
+            width={32}
+            height={32}
+            layout="responsive"
+            src="/svg/arrowLeft.svg"
+            alt="Arrow Right"
+            className="absolute inset-0 object-cover w-full"
+          />
         </button>
         {children}
         <button
           onClick={() => handleCarrousel("right")}
           className="absolute right-0 z-20 w-10 h-10 bg-gray-900 rounded-full leading-10 bg-opacity-75"
         >
-          <img src="/svg/arrowRight.svg" alt="Arrow Left" className="absolute inset-0 object-cover w-full"/>
+          <Image
+            width={32}
+            height={32}
+            layout="responsive"
+            src="/svg/arrowRight.svg"
+            alt="Arrow Left"
+            className="absolute inset-0 object-cover w-full"
+          />
         </button>
       </div>
     </div>
@@ -78,11 +94,14 @@ const Item: React.FC<ItemProps> = ({ value, indexItem, currentIndex }) => {
     <div
       key="indexItem"
       className={clsx(
-        `flex-shrink-0 w-full md:w-1/4 bg-gray-400 h-full transform scale-90`,
+        `flex-shrink-0 w-full rounded-xl animate-md:w-1/4 bg-gray-400 h-full transform scale-90`,
         indexItem < currentIndex && "hidden"
       )}
     >
-      <img
+      <Image
+        width={250}
+        height={250}
+        layout="responsive"
         className="w-full h-full bg-cover rounded-xl"
         src={`${value.thumbnail.path}/standard_fantastic.${value?.thumbnail?.extension}`}
         alt={value.title}

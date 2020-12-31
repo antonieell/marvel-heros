@@ -26,7 +26,7 @@ export const getCharacterByStartsName = (nameStartsWith: string) => {
     {
       params: {
         nameStartsWith,
-        apikey: process.env.REACT_APP_MARVEL_PUBLIC_KEY,
+        apikey: process.env.NEXT_PUBLIC_MARVEL_PUBLIC_KEY,
       },
     }
   );

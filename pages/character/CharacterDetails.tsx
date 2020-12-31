@@ -4,24 +4,26 @@ import { getCharacterById } from "../../api";
 import { Layout } from "../../layout";
 import { Result } from "../../shared/types";
 import { SliderHeroContent } from "./SliderHeroContent";
+import Image from 'next/image'
+import {SkeletonCharacterImage} from "./Skeleton";
 
-const CharacterDetails:React.FC = () => {
+const CharacterDetails: React.FC = () => {
   const [heroData, setHeroData] = useState<Result>();
 
   const router = useRouter();
+      const { characterId } = router.query;
 
   useEffect(() => {
-    if (heroData) {
+    if (!characterId) {
       return;
     }
     (async () => {
-      const { characterId } = router.query;
       console.log("fetch from api");
       //TODO: Capturar erros
       const { data } = await getCharacterById(characterId as string);
       setHeroData(data.data.results[0]);
     })();
-  }, [heroData, router.query]);
+  }, [router.query, characterId]);
 
   return (
     <Layout>
@@ -51,13 +53,15 @@ interface HeroDetailsProps {
 
 const HeroDetails: React.FC<HeroDetailsProps> = ({ value }) => {
   if (!value) {
-    //TODO: FAZER SKELETONS
-    return <div>Aguarde um instante</div>;
+    return <SkeletonCharacterImage/>
   }
   return (
-    <section className="flex flex-col items-center justify-center md:flex-row gap-12 md:gap-16">
+    <section className="flex flex-col items-center justify-center rounded-xl md:flex-row gap-12 md:gap-16">
       <div className="w-full bg-gray-300 bg-no-repeat bg-cover md:w-80 md:h-80 rounded-xl ">
-        <img
+        <Image
+          width={250}
+          height={250}
+          layout="responsive"
           className="object-cover object-center w-full h-full rounded-xl"
           src={`${value?.thumbnail?.path}/standard_fantastic.${value?.thumbnail?.extension}`}
           alt={`${value.name}`}
@@ -75,4 +79,4 @@ const HeroDetails: React.FC<HeroDetailsProps> = ({ value }) => {
   );
 };
 
-export default CharacterDetails
+export default CharacterDetails;
