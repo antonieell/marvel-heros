@@ -1,6 +1,6 @@
 import clxs from "clsx";
 import { useState} from "react";
-import { Link } from "react-router-dom";
+import  Link  from "next/link";
 import {getCharacterByStartsName} from "../../api";
 import { Result } from "../types";
 
@@ -77,21 +77,21 @@ const SearchHeroLink: React.FC<{ value: Result; isSearchActive: boolean }> = ({
   isSearchActive,
 }) => {
   return (
-    <Link
-      key={value.id}
-      className={clxs(
-        "flex items-center h-10 overflow-hidden",
-        !isSearchActive && "hidden"
-      )}
-      to={{ pathname: `/character/${value.id}`, state: value }}
-    >
-      <div className="flex-shrink-0 block w-12 h-full bg-gray-100">
-        <img
-          className="w-full h-full"
-          src={`${value?.thumbnail?.path}/standard_fantastic.${value?.thumbnail?.extension}`}
-          alt="hero icon"
-        />
-      </div>
+    <Link key={value.id} href={`/character/${value.id}`}>
+      <a
+        className={clxs(
+          "flex items-center h-10 overflow-hidden",
+          !isSearchActive && "hidden"
+        )}
+      >
+        <div className="flex-shrink-0 block w-12 h-full bg-gray-100">
+          <img
+            className="w-full h-full"
+            src={`${value?.thumbnail?.path}/standard_fantastic.${value?.thumbnail?.extension}`}
+            alt="hero icon"
+          />
+        </div>
+      </a>
       <p className="ml-4 truncate whitespace-nowrap">{value.name}</p>
     </Link>
   );

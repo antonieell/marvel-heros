@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 import { getCharacters } from "../../api";
+import Link from 'next/link'
 import { Layout } from "../../layout";
 import { Result } from "../../shared/types";
 import {SkeletonHeroCard} from "./Skeleton";
@@ -56,20 +56,20 @@ interface HeroCardProps {
 
 const HeroCard: React.FC<HeroCardProps> = ({ value }) => {
   return (
-    <Link
-      to={{ pathname: `/character/${value.id}`, state: value }}
-      className="relative h-64 bg-gray-900 bg-center bg-no-repeat bg-cover md:h-72"
-      style={{
-        backgroundImage: `url(${value.thumbnail.path}/landscape_incredible.${value.thumbnail.extension})`,
-      }}
-      key={value.id}
-    >
-      <span
-        style={{ clipPath: "polygon(5% 0, 100% 0, 95% 100%, 0 100%)" }}
-        className="absolute w-56 px-2 py-1 text-center text-black left-4 bg-gray-50 bottom-8"
+    <Link href={{ pathname: `/character/${value.id}` }} key={value.id}>
+      <a
+        style={{
+          backgroundImage: `url(${value.thumbnail.path}/landscape_incredible.${value.thumbnail.extension})`,
+        }}
+        className="relative h-64 bg-gray-900 bg-center bg-no-repeat bg-cover md:h-72"
       >
-        {value.name}
-      </span>
+        <span
+          style={{ clipPath: "polygon(5% 0, 100% 0, 95% 100%, 0 100%)" }}
+          className="absolute w-56 px-2 py-1 text-center text-black left-4 bg-gray-50 bottom-8"
+        >
+          {value.name}
+        </span>
+      </a>
     </Link>
   );
 };
