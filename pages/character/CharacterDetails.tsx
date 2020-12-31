@@ -1,30 +1,27 @@
-import { useEffect, useMemo, useState } from "react";
-import { useLocation, useRouteMatch } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useRouter } from "next/router";
 import { getCharacterById } from "../../api";
 import { Layout } from "../../layout";
 import { Result } from "../../shared/types";
 import { SliderHeroContent } from "./SliderHeroContent";
 
-export const CharacterDetails = () => {
+const CharacterDetails:React.FC = () => {
   const [heroData, setHeroData] = useState<Result>();
 
-  const { params } = useRouteMatch<{ characterId: string }>();
-  const { state } = useLocation<Result>();
-
-  useMemo(() => setHeroData(state), [state]);
+  const router = useRouter();
 
   useEffect(() => {
     if (heroData) {
       return;
     }
     (async () => {
+      const { characterId } = router.query;
       console.log("fetch from api");
-      const id = parseInt(params.characterId);
       //TODO: Capturar erros
-      const { data } = await getCharacterById(id);
+      const { data } = await getCharacterById(characterId as string);
       setHeroData(data.data.results[0]);
     })();
-  }, [heroData, params.characterId]);
+  }, [heroData, router.query]);
 
   return (
     <Layout>
@@ -78,3 +75,4 @@ const HeroDetails: React.FC<HeroDetailsProps> = ({ value }) => {
   );
 };
 
+export default CharacterDetails

@@ -11,7 +11,7 @@ export const getCharacters = (offset:Offset = undefined) => {
   return response;
 };
 
-export const getCharacterById = (id: number) => {
+export const getCharacterById = (id: string) => {
   const response: Promise<AxiosResponse<ICharacter>> = api.get(
     `/v1/public/characters/${id}`
   );

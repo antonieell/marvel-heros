@@ -8,7 +8,7 @@ export const getCollectioUri= (collectionUri: string) => {
   //a baseURL já definida
   const response: Promise<AxiosResponse<IComics>> = axios.get(collectionUri, {
     params: {
-      apikey: process.env.REACT_APP_MARVEL_PUBLIC_KEY,
+      apikey: process.env.NEXT_PUBLIC_MARVEL_PUBLIC_KEY,
     },
   });
   return response;
