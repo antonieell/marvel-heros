@@ -3,9 +3,9 @@ import { getCharacters } from "../../api";
 import Link from 'next/link'
 import { Layout } from "../../layout";
 import { Result } from "../../shared/types";
-import {SkeletonHeroCard} from "./Skeleton";
+import {SkeletonHeroCard} from "./_Skeleton";
 
-export const CharactersList = () => {
+export default function CharactersList () {
   const [dataHeros, setDataHeros] = useState<Result[]>([]);
   const [isLoading, setIsLoading] = useState(true)
   const [hasNextPage, setHasNextPage] = useState(true);
@@ -26,16 +26,15 @@ export const CharactersList = () => {
     if (data.data.offset + data.data.count >= data.data.total)
       return setHasNextPage(false);
   };
-
   return (
     <Layout>
+      {isLoading && <SkeletonHeroCard />}
       <div className="mx-auto max-w-screen-2xl wrapper md:gap-1 grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 auto-rows-auto">
-        {isLoading && (
-        <SkeletonHeroCard/>)}
         {dataHeros.map((value) => (
           <HeroCard value={value} />
         ))}
       </div>
+
       {hasNextPage && (
         <div className="flex items-center justify-center w-full pb-8 mt-4">
           <button

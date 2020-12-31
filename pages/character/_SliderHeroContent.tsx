@@ -3,8 +3,8 @@ import Image from "next/image";
 import { useState } from "react";
 import { Comics, Events, Series } from "../../shared/types";
 import { Result } from "../../shared/types/comics";
-import { SkeletonItem } from "./Skeleton";
-import { useResults } from "./useResults";
+import { SkeletonItem } from "./_Skeleton";
+import { useResults } from "./_useResults";
 
 interface SliderHeroContentProps {
   comics: Comics | undefined;
@@ -94,14 +94,12 @@ const Item: React.FC<ItemProps> = ({ value, indexItem, currentIndex }) => {
     <div
       key="indexItem"
       className={clsx(
-        `flex-shrink-0 w-full rounded-xl animate-md:w-1/4 bg-gray-400 h-full transform scale-90`,
+        `relative flex-shrink-0 w-full rounded-xl md:w-1/4 bg-gray-400 h-full transform scale-90`,
         indexItem < currentIndex && "hidden"
       )}
     >
       <Image
-        width={250}
-        height={250}
-        layout="responsive"
+        layout="fill"
         className="w-full h-full bg-cover rounded-xl"
         src={`${value.thumbnail.path}/standard_fantastic.${value?.thumbnail?.extension}`}
         alt={value.title}

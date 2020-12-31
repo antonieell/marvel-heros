@@ -1,2 +1,2 @@
-export {CharactersList as default} from './CharactersList/CharactersList'
+export {default}from './CharactersList/_CharactersList'
 
