@@ -1,8 +1,8 @@
 import clxs from "clsx";
 import { useState } from "react";
 import Link from "next/link";
-import { getCharacterByStartsName } from "../../api";
-import { Result } from "../types";
+import { getCharacterByStartsName } from "../../../api";
+import { Result } from "../../../types";
 import Image from "next/image";
 import {
   SearchHeroLinkProps,

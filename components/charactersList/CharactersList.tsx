@@ -1,20 +1,20 @@
 import { useEffect, useState } from "react";
 import { getCharacters } from "../../api";
-import Link from 'next/link'
-import { Layout } from "../../layout";
-import { Result } from "../../shared/types";
-import {SkeletonHeroCard} from "./_Skeleton";
+import Link from "next/link";
+import { Layout } from "../layout";
+import { Result } from "../../types/";
+import { SkeletonHeroCard } from "./Skeleton";
 
-export default function CharactersList () {
+export function CharactersList() {
   const [dataHeros, setDataHeros] = useState<Result[]>([]);
-  const [isLoading, setIsLoading] = useState(true)
+  const [isLoading, setIsLoading] = useState(true);
   const [hasNextPage, setHasNextPage] = useState(true);
 
   useEffect(() => {
     (async () => {
       const { data } = await getCharacters();
       setDataHeros(data.data.results);
-      setIsLoading(false)
+      setIsLoading(false);
     })();
   }, []);
 
@@ -47,7 +47,7 @@ export default function CharactersList () {
       )}
     </Layout>
   );
-};
+}
 
 interface HeroCardProps {
   value: Result;
@@ -57,6 +57,7 @@ const HeroCard: React.FC<HeroCardProps> = ({ value }) => {
   return (
     <Link href={{ pathname: `/character/${value.id}` }} key={value.id}>
       <a
+        href={`/character/${value.id}`}
         style={{
           backgroundImage: `url(${value.thumbnail.path}/landscape_incredible.${value.thumbnail.extension})`,
         }}

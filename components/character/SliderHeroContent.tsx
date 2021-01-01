@@ -1,10 +1,9 @@
 import clsx from "clsx";
 import Image from "next/image";
 import { useState } from "react";
-import { Comics, Events, Series } from "../../shared/types";
-import { Result } from "../../shared/types/comics";
-import { SkeletonItem } from "./_Skeleton";
-import { useResults } from "./_useResults";
+import { Comics, Result, Events, Series } from "../../types/";
+import { SkeletonItem } from "./Skeleton";
+import { useResults } from "./useResults";
 
 interface SliderHeroContentProps {
   comics: Comics | undefined;

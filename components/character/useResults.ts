@@ -1,7 +1,7 @@
-import { Comics, Events, Series } from "../../shared/types";
+import { Comics, Events, Series } from "../../types";
 import { getCollectioUri } from "../../api/comics.api";
 import { useEffect, useState } from "react";
-import { Result } from "../../shared/types/comics";
+import { Result } from "../../types/comics";
 
 interface useResultsProps {
   comics: Comics | undefined;

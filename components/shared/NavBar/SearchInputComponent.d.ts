@@ -1,4 +1,4 @@
-import { Result } from "../../shared/types";
+import { Result } from "../../../types";
 
 export interface SearchHeroResultProps {
   matchHeros: Result[];

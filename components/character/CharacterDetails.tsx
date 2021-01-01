@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { getCharacterById } from "../../api";
-import { Layout } from "../../layout";
-import { Result } from "../../shared/types";
-import { SliderHeroContent } from "./_SliderHeroContent";
+import { Layout } from "../layout/";
+import { Result } from "../../types/";
+import { SliderHeroContent } from "./SliderHeroContent";
 import Image from "next/image";
-import { SkeletonCharacterImage } from "./_Skeleton";
+import { SkeletonCharacterImage } from "./Skeleton";
 
-const CharacterDetails: React.FC = () => {
+export const CharacterDetails: React.FC = () => {
   const [heroData, setHeroData] = useState<Result>();
 
   const router = useRouter();
@@ -57,7 +57,7 @@ const HeroDetails: React.FC<HeroDetailsProps> = ({ value }) => {
   }
   return (
     <section className="flex flex-col items-center justify-center rounded-xl md:flex-row gap-12 md:gap-16">
-      <div className="relative w-full bg-gray-300 bg-no-repeat bg-cover md:w-80 md:h-80 rounded-xl ">
+      <div className="w-full bg-gray-300 bg-no-repeat bg-cover md:w-80 md:h-80 rounded-xl ">
         <Image
           width={250}
           height={250}
@@ -79,4 +79,3 @@ const HeroDetails: React.FC<HeroDetailsProps> = ({ value }) => {
   );
 };
 
-export default CharacterDetails;

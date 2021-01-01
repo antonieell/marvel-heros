@@ -1,1 +1,1 @@
-export {default} from './_CharacterDetails'
+export { CharacterDetails as default } from "@/components/index";

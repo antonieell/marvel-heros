@@ -26,3 +26,5 @@ export const SkeletonCharacterImage = () => {
     </>
   );
 };
+
+export default SkeletonItem
