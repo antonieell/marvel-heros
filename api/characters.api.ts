@@ -1,5 +1,5 @@
 import { AxiosResponse } from "axios";
-import { ICharacter } from "../shared/types";
+import { ICharacter } from "@/types/index";
 import api from "./api";
 import axios from 'axios'
 

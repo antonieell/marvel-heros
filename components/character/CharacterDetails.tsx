@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
-import { getCharacterById } from "../../api";
-import { Layout } from "../layout/";
-import { Result } from "../../types/";
+import { getCharacterById } from "@/api/index";
+import { Result } from "@/types/index";
 import { SliderHeroContent } from "./SliderHeroContent";
 import Image from "next/image";
 import { SkeletonCharacterImage } from "./Skeleton";
@@ -26,7 +25,6 @@ export const CharacterDetails: React.FC = () => {
   }, [router.query, characterId]);
 
   return (
-    <Layout>
       <Container>
         <HeroDetails value={heroData} />
         <SliderHeroContent
@@ -35,7 +33,6 @@ export const CharacterDetails: React.FC = () => {
           comics={heroData?.comics}
         />
       </Container>
-    </Layout>
   );
 };
 

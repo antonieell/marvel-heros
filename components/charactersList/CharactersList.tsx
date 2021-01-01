@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
-import { getCharacters } from "../../api";
+import { getCharacters } from "@/api/index";
 import Link from "next/link";
-import { Layout } from "../layout";
-import { Result } from "../../types/";
+import { Result } from "@/types/index";
 import { SkeletonHeroCard } from "./Skeleton";
 
 export function CharactersList() {
@@ -27,7 +26,7 @@ export function CharactersList() {
       return setHasNextPage(false);
   };
   return (
-    <Layout>
+    <>
       {isLoading && <SkeletonHeroCard />}
       <div className="mx-auto max-w-screen-2xl wrapper md:gap-1 grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 auto-rows-auto">
         {dataHeros.map((value) => (
@@ -45,7 +44,7 @@ export function CharactersList() {
           </button>
         </div>
       )}
-    </Layout>
+    </>
   );
 }
 

@@ -1,5 +1,5 @@
 import { AxiosResponse } from "axios";
-import { IComics } from "../shared/types";
+import { IComics } from "@/types/index";
 import axios from 'axios'
 
 export const getCollectioUri= (collectionUri: string) => {
