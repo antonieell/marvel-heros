@@ -1,7 +1,7 @@
 import { Comics, Events, Series } from "../../types";
 import { getCollectioUri } from "../../api/comics.api";
 import { useEffect, useState } from "react";
-import { Result } from "../../types/comics";
+import { ResultComics} from "@/types/index";
 
 interface useResultsProps {
   comics: Comics | undefined;
@@ -10,7 +10,7 @@ interface useResultsProps {
 }
 
 export const useResults = ({ comics, events, series }: useResultsProps) => {
-  const [results, setResults] = useState<Result[]>([]);
+  const [results, setResults] = useState<ResultComics[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
     // Uma forma masi peformática de fazer essa rotina
@@ -33,7 +33,7 @@ export const useResults = ({ comics, events, series }: useResultsProps) => {
     })();
   }, [comics, events, series]);
 
-  const appendInState = (newResult: Result[]) => {
+  const appendInState = (newResult:ResultComics[]) => {
     setResults((prev) => [...prev, ...newResult]);
   };
 

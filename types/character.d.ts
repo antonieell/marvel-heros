@@ -14,7 +14,7 @@ export interface ICharacter {
   etag: string;
 }
 
-export type Result = {
+export type ResultCharacter = {
   id: number;
   name: string;
   description: string;

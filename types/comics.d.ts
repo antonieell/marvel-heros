@@ -18,7 +18,8 @@ type TextObjects = Array<{
   language: string;
   text: string;
 }>;
-export type Result = {
+
+export type ResultComics = {
   id: number;
   description: string;
   modified: string;

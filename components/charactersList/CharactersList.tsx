@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import { getCharacters } from "@/api/index";
 import Link from "next/link";
-import { Result } from "@/types/index";
+import { ResultCharacter } from "@/types/index";
 import { SkeletonHeroCard } from "./Skeleton";
 
 export function CharactersList() {
-  const [dataHeros, setDataHeros] = useState<Result[]>([]);
+  const [dataHeros, setDataHeros] = useState<ResultCharacter[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [hasNextPage, setHasNextPage] = useState(true);
 
@@ -49,7 +49,7 @@ export function CharactersList() {
 }
 
 interface HeroCardProps {
-  value: Result;
+  value:ResultCharacter;
 }
 
 const HeroCard: React.FC<HeroCardProps> = ({ value }) => {
