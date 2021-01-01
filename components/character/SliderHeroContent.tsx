@@ -1,7 +1,7 @@
 import clsx from "clsx";
 import Image from "next/image";
 import { useState } from "react";
-import { Comics, Result, Events, Series } from "../../types/";
+import { Comics, ResultComics, Events, Series } from "../../types/";
 import { SkeletonItem } from "./Skeleton";
 import { useResults } from "./useResults";
 
@@ -14,7 +14,7 @@ interface CarrouselProps {
   handleCarrousel: (action: "right" | "left") => void;
 }
 interface ItemProps {
-  value: Result;
+  value: ResultComics;
   indexItem: number;
   currentIndex: number;
 }

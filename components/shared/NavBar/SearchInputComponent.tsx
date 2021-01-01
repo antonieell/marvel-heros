@@ -2,7 +2,7 @@ import clxs from "clsx";
 import { useState } from "react";
 import Link from "next/link";
 import { getCharacterByStartsName } from "../../../api";
-import { Result } from "../../../types";
+import { ResultCharacter } from "../../../types";
 import Image from "next/image";
 import {
   SearchHeroLinkProps,
@@ -11,7 +11,7 @@ import {
 
 const SearchInput: React.FC = () => {
   const [isSearchActive, setIsSearchActive] = useState(false);
-  const [heros, setHero] = useState<Result[]>([]);
+  const [heros, setHero] = useState<ResultCharacter[]>([]);
 
   const handleSearchCallsApi = async (
     e: React.ChangeEvent<HTMLInputElement>

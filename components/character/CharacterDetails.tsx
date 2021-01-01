@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { getCharacterById } from "@/api/index";
-import { Result } from "@/types/index";
+import { ResultCharacter } from "@/types/index";
 import { SliderHeroContent } from "./SliderHeroContent";
 import Image from "next/image";
 import { SkeletonCharacterImage } from "./Skeleton";
 
 export const CharacterDetails: React.FC = () => {
-  const [heroData, setHeroData] = useState<Result>();
+  const [heroData, setHeroData] = useState<ResultCharacter>();
 
   const router = useRouter();
   const { characterId } = router.query;
@@ -45,7 +45,7 @@ const Container: React.FC = ({ children }) => {
 };
 
 interface HeroDetailsProps {
-  value: Result | undefined;
+  value?: ResultCharacter
 }
 
 const HeroDetails: React.FC<HeroDetailsProps> = ({ value }) => {

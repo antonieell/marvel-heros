@@ -1,4 +1,4 @@
-import {IComics} from "../shared/types/";
+import {IComics} from "@/types/index";
 
 export const comicsDataMocked : IComics= {
   "code": 200,

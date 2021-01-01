@@ -1,4 +1,4 @@
-import { ICharacter } from "../shared/types/index";
+import { ICharacter } from "@/types/index";
 
 const caractersDataMock: ICharacter = {
   code: 200,
