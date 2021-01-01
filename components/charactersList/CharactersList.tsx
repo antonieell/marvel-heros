@@ -30,7 +30,7 @@ export function CharactersList() {
       {isLoading && <SkeletonHeroCard />}
       <div className="mx-auto max-w-screen-2xl wrapper md:gap-1 grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 auto-rows-auto">
         {dataHeros.map((value) => (
-          <HeroCard value={value} />
+          <HeroCard value={value} key={value.id}/>
         ))}
       </div>
 
@@ -54,7 +54,7 @@ interface HeroCardProps {
 
 const HeroCard: React.FC<HeroCardProps> = ({ value }) => {
   return (
-    <Link href={{ pathname: `/character/${value.id}` }} key={value.id}>
+    <Link href={{ pathname: `/character/${value.id}` }} >
       <a
         href={`/character/${value.id}`}
         style={{
