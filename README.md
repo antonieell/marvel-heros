@@ -17,7 +17,7 @@ See [`.env.example`](https://github.com/antonieell/marvel-heros/blob/main/.env.e
 
 ## Marvel Comics API
 
-Get an API key in [Marveli Comics API](https://developer.marvel.com/documentation/getting_started)
+Get an API key in [Marvel Comics API](https://developer.marvel.com/documentation/getting_started)
 
 ## Built Using
 
