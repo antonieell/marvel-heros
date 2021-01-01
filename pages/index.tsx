@@ -1,4 +1,4 @@
-import { CharactersList, Layout } from "components/index";
+import { CharactersList, Layout } from "@/components/index";
 import Head from "next/head";
 
 export default function CharactersListPage() {
