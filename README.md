@@ -22,6 +22,6 @@ Get an API key in [Marvel Comics API](https://developer.marvel.com/documentation
 ## Built Using
 
 - [React](https://reactjs.org)
+- [NextJs](http://nextjs.com/)
 - [Typescript](http://typescriptlang.org/)
-- [Tailwind](https://tailwindcss.com/)
-- [Reac Router](https://reactrouter.com/)
+- [TailwindCSS](https://tailwindcss.com/)
