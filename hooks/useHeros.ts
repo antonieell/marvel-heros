@@ -7,17 +7,20 @@ export const useHeros = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [hasNextPage, setHasNextPage] = useState(true);
 
+  const fetchData = async (offset = 0) => {
+    const { data } = await getCharacters(offset);
+    setDataHeros(data.data.results);
+    setIsLoading(false);
+    return data;
+  };
+
   useEffect(() => {
-    (async () => {
-      const { data } = await getCharacters();
-      setDataHeros(data.data.results);
-      setIsLoading(false);
-    })();
+    fetchData();
   }, []);
 
   const loadNextPage = async () => {
     const offset = dataHeros.length;
-    const { data } = await getCharacters(offset);
+    const data = await fetchData(offset);
     const results = data.data.results;
     setDataHeros((prev) => [...prev, ...results]);
     if (data.data.offset + data.data.count >= data.data.total)
