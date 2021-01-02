@@ -2,8 +2,10 @@ module.exports = {
   moduleNameMapper: {
     "@/components/*": "<rootDir>/components",
     "@/api/*": "<rootDir>/api/index.ts",
-    "@/types/*": "<rootDir>/types/*",
-    "@/styles/*": "<rootDir>/styles/*",
+    "@/types/*": "<rootDir>/types",
+    "@/hooks/*": "<rootDir>/hooks",
+    "@/utils/*": "<rootDir>/utils",
+    "@/styles/*": "<rootDir>/styles",
 
     "\\.(css|less)$": "<rootDir>/__mocks__/styleMock.js",
     "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$":

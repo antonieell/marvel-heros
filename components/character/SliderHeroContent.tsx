@@ -1,6 +1,5 @@
-import { useCharacterDetails } from "@/hooks/useCharacterDetails";
+import { useCharacterDetails } from "@/hooks/index";
 import Image from "next/image";
-import React, { useState } from "react";
 import { Comics, ResultComics, Events, Series } from "../../types/";
 import { Carrousel } from "@/components/index";
 import { SkeletonItem } from "./Skeleton";
