@@ -1,9 +1,9 @@
 import { HeroDetails, SliderHeroContent, Layout } from "components/index";
-import {useCharacterList} from '@/hooks/index'
+import { useCharacterList } from "@/hooks/index";
 import Head from "next/head";
 import { useRouter } from "next/router";
 
-export default function CharacterDetails() {
+function CharacterDetails() {
   const router = useRouter();
   const { characterId } = router.query;
   const { heroData } = useCharacterList(characterId as string);
@@ -25,4 +25,4 @@ export default function CharacterDetails() {
   );
 }
 
-
+export default CharacterDetails;
