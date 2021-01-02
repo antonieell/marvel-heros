@@ -1,2 +1,2 @@
 export * from "./useHeros"
-export * from "./useCharacter"
+export * from "./useCharacterList"

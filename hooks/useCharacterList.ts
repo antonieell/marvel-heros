@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { getCharacterById } from "@/api/index";
 import { ResultCharacter } from "@/types/index";
 
-export const useCharacter = (characterId:string) => {
+export const useCharacterList = (characterId:string) => {
 
   const [heroData, setHeroData] = useState<ResultCharacter>();
 
