@@ -91,7 +91,6 @@ const Carrousel: React.FC<CarrouselProps> = ({ children, handleCarrousel }) => {
 const Item: React.FC<ItemProps> = ({ value, indexItem, currentIndex }) => {
   return (
     <div
-      key="indexItem"
       className={clsx(
         `relative flex-shrink-0 w-full rounded-xl md:w-1/4 bg-gray-400 h-full transform scale-90`,
         indexItem < currentIndex && "hidden"
