@@ -4,7 +4,7 @@ import '@testing-library/jest-dom'
 
 describe("Index Characters List", () => {
   afterEach(cleanup);
-  it("renders without crashing", async () => {
+  it("should renders without crashing", async () => {
     const component = render(<CharactersList />);
     const text = await component.findByText("Carregar Mais");
     expect(text).toBeInTheDocument();
