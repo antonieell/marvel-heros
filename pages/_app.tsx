@@ -2,7 +2,7 @@ import '../styles/index.css'
 
 function MyApp({ Component, pageProps }: any) {
   return <>
-    <Component {...pageProps} />;
+    <Component {...pageProps} />
   </>
 }
 

@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import SearchInput from "./SearchInputComponent";
 
@@ -16,7 +17,7 @@ const Logo = () => {
   return (
     <Link href="/">
       <a href="/" className="w-24 mx-auto text-center">
-        <img className="w-full h-full" alt="Logo" src="/assets/marvelLogo.png" />
+        <Image width={100} height={36} layout="responsive" className="w-full h-full" alt="Logo" src="/assets/marvelLogo.png" />
       </a>
     </Link>
   );

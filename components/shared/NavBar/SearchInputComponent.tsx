@@ -30,11 +30,13 @@ const SearchInput: React.FC = () => {
   return (
     <div className="relative right-0 flex flex-shrink-0 md:absolute">
       <label
-        className="w-8 mr-2 text-red-400 cursor-pointer"
+        className="w-8 mr-2 leading-none text-red-400 cursor-pointer"
         htmlFor="search_heros"
         onClick={() => handleSearchState("open")}
       >
-        <img
+        <Image
+          width={32}
+          height={32}
           className="w-full text-red-400 fill-current"
           src="/svg/search.svg"
           alt="search"
@@ -57,9 +59,9 @@ const SearchInput: React.FC = () => {
       />
       <button
         onClick={() => handleSearchState("close")}
-        className={clxs(isSearchActive ? "-ml-8" : "hidden")}
+        className={clxs("leading-none", isSearchActive ? "-ml-8" : "hidden")}
       >
-        <img src="/svg/close.svg" alt="search" />
+        <Image width={32} height={32} src="/svg/close.svg" alt="Close" />
       </button>
     </div>
   );

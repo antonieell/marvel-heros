@@ -1,36 +1,16 @@
-import { useEffect, useState } from "react";
-import { getCharacters } from "@/api/index";
 import Link from "next/link";
 import { ResultCharacter } from "@/types/index";
 import { SkeletonHeroCard } from "./Skeleton";
+import { useHeros } from "hooks";
 
-export function CharactersList() {
-  const [dataHeros, setDataHeros] = useState<ResultCharacter[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const [hasNextPage, setHasNextPage] = useState(true);
-
-  useEffect(() => {
-    (async () => {
-      const { data } = await getCharacters();
-      setDataHeros(data.data.results);
-      setIsLoading(false);
-    })();
-  }, []);
-
-  const loadNextPage = async () => {
-    const offset = dataHeros.length;
-    const { data } = await getCharacters(offset);
-    const results = data.data.results;
-    setDataHeros((prev) => [...prev, ...results]);
-    if (data.data.offset + data.data.count >= data.data.total)
-      return setHasNextPage(false);
-  };
+export const CharactersList: React.FC = () => {
+  const { dataHeros, isLoading, hasNextPage, loadNextPage } = useHeros();
   return (
     <>
       {isLoading && <SkeletonHeroCard />}
       <div className="mx-auto max-w-screen-2xl wrapper md:gap-1 grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 auto-rows-auto">
         {dataHeros.map((value) => (
-          <HeroCard value={value} />
+          <HeroCard value={value} key={value.id} />
         ))}
       </div>
 
@@ -46,15 +26,15 @@ export function CharactersList() {
       )}
     </>
   );
-}
+};
 
 interface HeroCardProps {
-  value:ResultCharacter;
+  value: ResultCharacter;
 }
 
 const HeroCard: React.FC<HeroCardProps> = ({ value }) => {
   return (
-    <Link href={{ pathname: `/character/${value.id}` }} key={value.id}>
+    <Link href={{ pathname: `/character/${value.id}` }}>
       <a
         href={`/character/${value.id}`}
         style={{
