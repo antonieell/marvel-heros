@@ -1,7 +1,7 @@
 import { Comics, Events, Series } from "../../types";
 import { getCollectioUri } from "../../api/comics.api";
 import { useEffect, useState } from "react";
-import { ResultComics} from "@/types/index";
+import { ResultComics } from "@/types/index";
 
 interface useResultsProps {
   comics: Comics | undefined;
@@ -9,7 +9,7 @@ interface useResultsProps {
   events: Events | undefined;
 }
 
-export const useResults = ({ comics, events, series }: useResultsProps) => {
+export const useSlider = ({ comics, events, series }: useResultsProps) => {
   const [results, setResults] = useState<ResultComics[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
@@ -33,7 +33,7 @@ export const useResults = ({ comics, events, series }: useResultsProps) => {
     })();
   }, [comics, events, series]);
 
-  const appendInState = (newResult:ResultComics[]) => {
+  const appendInState = (newResult: ResultComics[]) => {
     setResults((prev) => [...prev, ...newResult]);
   };
 

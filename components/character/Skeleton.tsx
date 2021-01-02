@@ -21,10 +21,10 @@ export const SkeletonCharacterImage = () => {
   return (
     <>
       <div
-        className={`w-full bg-gray-300 bg-no-repeat bg-cover md:w-80 md:h-80 rounded-xl `}
+        className={`w-full bg-gray-300 mx-auto bg-no-repeat bg-cover md:w-80 md:h-80 rounded-xl `}
       />
     </>
   );
 };
 
-export default SkeletonItem
+export default SkeletonItem;

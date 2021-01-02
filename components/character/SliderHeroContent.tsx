@@ -3,7 +3,7 @@ import Image from "next/image";
 import { useState } from "react";
 import { Comics, ResultComics, Events, Series } from "../../types/";
 import { SkeletonItem } from "./Skeleton";
-import { useResults } from "./useResults";
+import { useSlider } from "./useSlider";
 
 interface SliderHeroContentProps {
   comics: Comics | undefined;
@@ -25,7 +25,7 @@ export const SliderHeroContent: React.FC<SliderHeroContentProps> = ({
   events,
 }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const { results, isLoading } = useResults({ comics, events, series });
+  const { results, isLoading } = useSlider({ comics, events, series });
 
   const handleCarrousel = (action: "right" | "left") => {
     if (results.length <= 4) return;

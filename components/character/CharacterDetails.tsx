@@ -1,55 +1,15 @@
-import { useEffect, useState } from "react";
-import { useRouter } from "next/router";
-import { getCharacterById } from "@/api/index";
 import { ResultCharacter } from "@/types/index";
-import { SliderHeroContent } from "./SliderHeroContent";
 import Image from "next/image";
 import { SkeletonCharacterImage } from "./Skeleton";
 
-export const CharacterDetails: React.FC = () => {
-  const [heroData, setHeroData] = useState<ResultCharacter>();
-
-  const router = useRouter();
-  const { characterId } = router.query;
-
-  useEffect(() => {
-    if (!characterId) {
-      return;
-    }
-    (async () => {
-      console.log("fetch from api");
-      //TODO: Capturar erros
-      const { data } = await getCharacterById(characterId as string);
-      setHeroData(data.data.results[0]);
-    })();
-  }, [router.query, characterId]);
-
-  return (
-      <Container>
-        <HeroDetails value={heroData} />
-        <SliderHeroContent
-          series={heroData?.series}
-          events={heroData?.events}
-          comics={heroData?.comics}
-        />
-      </Container>
-  );
-};
-
-const Container: React.FC = ({ children }) => {
-  return (
-    <main className="flex flex-col justify-center w-full px-12 py-6 mx-auto gap-8 md:gap-16">
-      {children}
-    </main>
-  );
-};
-
 interface HeroDetailsProps {
-  value?: ResultCharacter
+  characterDetails?: ResultCharacter;
 }
 
-const HeroDetails: React.FC<HeroDetailsProps> = ({ value }) => {
-  if (!value) {
+export const HeroDetails: React.FC<HeroDetailsProps> = ({
+  characterDetails,
+}) => {
+  if (!characterDetails) {
     return <SkeletonCharacterImage />;
   }
   return (
@@ -60,16 +20,18 @@ const HeroDetails: React.FC<HeroDetailsProps> = ({ value }) => {
           height={250}
           layout="responsive"
           className="object-cover object-center w-full h-full rounded-xl"
-          src={`${value?.thumbnail?.path}/standard_fantastic.${value?.thumbnail?.extension}`}
-          alt={`${value.name}`}
+          src={`${characterDetails?.thumbnail?.path}/standard_fantastic.${characterDetails?.thumbnail?.extension}`}
+          alt={`${characterDetails.name}`}
         />
       </div>
       <article className="self-start md:self-center">
         <h3 className="font-extrabold text-red-600">Name</h3>
-        <p>{value.name}</p>
+        <p>{characterDetails.name}</p>
         <h3 className="font-extrabold text-red-600">Description</h3>
         <p className="max-w-lg">
-          {value.description ? value.description : "Description does not exist"}
+          {characterDetails.description
+            ? characterDetails.description
+            : "Description does not exist"}
         </p>
       </article>
     </section>

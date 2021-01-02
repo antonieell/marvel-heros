@@ -1,13 +1,28 @@
-import { CharacterDetails , Layout} from "@/components/index";
+import { HeroDetails, SliderHeroContent, Layout } from "components/index";
+import {useCharacter} from '@/hooks/index'
 import Head from "next/head";
+import { useRouter } from "next/router";
 
-export default function CharacterDetailsPage(){
-  return(
+export default function CharacterDetails() {
+  const router = useRouter();
+  const { characterId } = router.query;
+  const { heroData } = useCharacter(characterId as string);
+
+  return (
     <Layout>
       <Head>
         <title>Marvel Heros</title>
       </Head>
-      <CharacterDetails/>
+      <main className="flex flex-col justify-center w-full px-12 py-6 mx-auto gap-8 md:gap-16">
+        <HeroDetails characterDetails={heroData} />
+        <SliderHeroContent
+          series={heroData?.series}
+          events={heroData?.events}
+          comics={heroData?.comics}
+        />
+      </main>
     </Layout>
-  )
+  );
 }
+
+
