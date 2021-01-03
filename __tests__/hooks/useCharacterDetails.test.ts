@@ -1,7 +1,6 @@
-import { useCharacterDetails } from "@/hooks/index";
-import { setupHook } from "@/utils/index";
+import { useCharacterDetails, useResultsProps } from "@/hooks/index";
 import { cleanup } from "@testing-library/react";
-import { act } from "react-dom/test-utils";
+import { renderHook } from "@testing-library/react-hooks";
 
 jest.mock("../../api/comics.api", () => ({
   getCollectioUri: () => ({
@@ -27,11 +26,12 @@ describe("useCharacterDetails hook", () => {
   };
 
   it("Should fetch Heros details", async () => {
-    let useHook: any;
-    await act(async () => {
-      useHook = setupHook(useCharacterDetails, items);
-    });
-    expect(useHook.results.length).not.toBe(0);
-    expect(useHook.isLoading).toBe(false);
+    const { result, waitForNextUpdate } = renderHook(() =>
+      useCharacterDetails(items as useResultsProps)
+    );
+    await waitForNextUpdate();
+
+    expect(result.current.results.length).not.toBe(0);
+    expect(result.current.isLoading).toBeFalsy();
   });
 });

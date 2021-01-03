@@ -1,50 +1,49 @@
 import { useCharacterPick } from "@/hooks/index";
-import { setupHook } from "@/utils/index";
 import { cleanup } from "@testing-library/react";
-import { act } from "react-dom/test-utils";
+import { renderHook } from "@testing-library/react-hooks";
 
 jest.mock("../../api/characters.api", () => ({
-  getCharacterById: (id: string) => ({
-    data: {
-      data: {
-        results: [
-          {
-            id: 1011334,
-            name: "3-D Man",
-            description: "",
-            modified: "2014-04-29T14:18:17-0400",
-            thumbnail: {
-              path: "http://i.annihil.us/u/prod/marvel/i/mg/c/e0/535fecbbb9784",
-              extension: "jpg",
-            },
-            resourceURI:
-              "http://gateway.marvel.com/v1/public/characters/1011334",
-            comics: {},
-            series: {},
-            events: {},
-            stories: {},
+  getCharacterById: (id: any) => {
+    if (id === 2) {
+      throw Error("Forces errors in request");
+    }
+    return new Promise((resolve, rejects) => {
+      id === "invalid" && rejects("invalid Id");
+      resolve({
+        data: {
+          data: {
+            results: [{}],
           },
-        ],
-      },
-    },
-  }),
+        },
+      });
+    });
+  },
 }));
 
 describe("useCharacterPick hook", () => {
   afterEach(cleanup);
+
   it("Error should be true in case not passed characterId", async () => {
-    let useHook: any;
-    await act(async () => {
-      useHook = setupHook(useCharacterPick);
-    });
-    expect(useHook.error).toBe(true);
+    //@ts-ignore
+    const { result } = renderHook(() => useCharacterPick());
+    expect(result.error).toEqual(Error("characterId should be provided"));
   });
 
   it("Should fetch data", async () => {
-    let useHook: any;
-    await act(async () => {
-      useHook = setupHook(useCharacterPick, 1);
-    });
-    expect(useHook).not.toBe(undefined);
+    const { result, waitForNextUpdate } = renderHook(() =>
+      useCharacterPick("2")
+    );
+    await waitForNextUpdate();
+    expect(result.current.heroData).toBeTruthy();
+  });
+
+  it("If characterId is invalid", async () => {
+    const { result } = renderHook(() => useCharacterPick("invalid"));
+    expect(result.error).toEqual(Error("invalid CharacterId"));
+  });
+
+  it("Error in request", async () => {
+    const { result } = renderHook(() => useCharacterPick(2));
+    expect(result.current.error).toBeTruthy();
   });
 });
