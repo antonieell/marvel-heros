@@ -3,7 +3,7 @@ import { getCollectioUri } from "@/api/index";
 import { useEffect, useState } from "react";
 import { ResultComics } from "@/types/index";
 
-interface useResultsProps {
+export interface useResultsProps {
   comics: Comics | undefined;
   series: Series | undefined;
   events: Events | undefined;

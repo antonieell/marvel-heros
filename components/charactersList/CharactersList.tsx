@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { ResultCharacter } from "@/types/index";
 import { SkeletonHeroCard } from "./Skeleton";
-import { useHeros } from "hooks";
+import { useHeros } from "@/hooks/index";
 
 export const CharactersList: React.FC = () => {
   const { dataHeros, isLoading, hasNextPage, loadNextPage } = useHeros();

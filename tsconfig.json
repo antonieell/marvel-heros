@@ -24,6 +24,7 @@
       "@/types/*": ["types/*"],
       "@/styles/*": ["styles/*"],
       "@/hooks/*": ["hooks/*"],
+      "@/utils/*": ["utils/*"],
       "@/api/*": ["api/*"]
     }
   },
