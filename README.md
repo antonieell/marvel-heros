@@ -25,3 +25,5 @@ Get an API key in [Marvel Comics API](https://developer.marvel.com/documentation
 - [NextJs](http://nextjs.com/)
 - [Typescript](http://typescriptlang.org/)
 - [TailwindCSS](https://tailwindcss.com/)
+- [JestJs](https://jestjs.io/)
+- [React Testing Library](https://testing-library.com/) 
