@@ -25,8 +25,9 @@ describe("useCharacterPick hook", () => {
 
   it("Error should be true in case not passed characterId", async () => {
     //@ts-ignore
-    const { result } = renderHook(() => useCharacterPick());
-    expect(result.error).toEqual(Error("characterId should be provided"));
+    const { result, waitForNextUpdate } = renderHook(() => useCharacterPick());
+    await waitForNextUpdate()
+    expect(result.current.error).toBeTruthy()
   });
 
   it("Should fetch data", async () => {
@@ -37,13 +38,14 @@ describe("useCharacterPick hook", () => {
     expect(result.current.heroData).toBeTruthy();
   });
 
-  it("If characterId is invalid", async () => {
-    const { result } = renderHook(() => useCharacterPick("invalid"));
-    expect(result.error).toEqual(Error("invalid CharacterId"));
+  it("set erro to true if characterId is invalid", async () => {
+    const { result, waitForNextUpdate } = renderHook(() => useCharacterPick("invalid"));
+    await waitForNextUpdate()
+    expect(result.current.error).toBeTruthy()
   });
 
-  it("Error in request", async () => {
-    const { result } = renderHook(() => useCharacterPick(2));
+  it("set erro to ture if ocours some error in request", async () => {
+    const { result } = renderHook(() => useCharacterPick(2 as any));
     expect(result.current.error).toBeTruthy();
   });
 });
