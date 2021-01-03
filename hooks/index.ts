@@ -1,3 +1,3 @@
 export * from "./useHeros"
-export * from "./useCharacterList"
+export * from "./useCharacterPick"
 export * from "./useCharacterDetails"

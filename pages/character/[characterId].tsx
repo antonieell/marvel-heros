@@ -1,12 +1,12 @@
 import { HeroDetails, SliderHeroContent, Layout } from "components/index";
-import { useCharacterList } from "@/hooks/index";
+import { useCharacterPick} from "@/hooks/index";
 import Head from "next/head";
 import { useRouter } from "next/router";
 
 function CharacterDetails() {
   const router = useRouter();
   const { characterId } = router.query;
-  const { heroData } = useCharacterList(characterId as string);
+  const { heroData } = useCharacterPick(characterId as string);
 
   return (
     <Layout>
